@@ -1,0 +1,81 @@
+<div class="container" style="width: 778px;margin-top: 20px;margin-left: 30px;">
+
+    <h3 style="color: blueviolet; text-align: center;"><strong>Full Stak Angular App With Springboot And MongoDB</strong></h3>
+<br>
+
+<mat-form-field style="width: 175px;">
+    <input matInput type="text" [(ngModel)]="product.name" placeholder="Enter Name here"/>
+    <mat-icon fontIcon="person" matSuffix></mat-icon>
+</mat-form-field>
+<mat-form-field style="width: 175px; margin-left: 15px;">
+    <input matInput type="text" [(ngModel)]="product.category" placeholder="Enter Category here"/>
+    <mat-icon fontIcon="category" matSuffix></mat-icon>
+</mat-form-field>
+<mat-form-field style="width: 175px; margin-left: 15px;">
+    <input matInput type="text" [(ngModel)]="product.brand" placeholder="Enter Brand here"/>
+    <mat-icon fontIcon="brand" matSuffix></mat-icon>
+</mat-form-field>
+
+<button mat-flat-button (click)="addOrEditProduct(product)" style="margin-left: 25px;">Submit</button>
+<button mat-flat-button style="margin-left: 10px;" color="warn">Cancel</button>
+
+<br>
+
+<mat-form-field >
+    <input matInput (input)="searchProducts(filter.value)" type="text" placeholder="Search here" #filter/>
+    <mat-icon fontIcon="search" matSuffix></mat-icon>
+</mat-form-field>
+<br/>
+<!-- Started Table  -->
+
+<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+  
+    <!-- Position Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header >ID</th>
+      <td mat-cell *matCellDef="let product"> {{product.id}} </td>
+    </ng-container>
+  
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header > Name </th>
+      <td mat-cell *matCellDef="let product"> {{product.name}} </td>
+    </ng-container>
+  
+    <!-- Weight Column -->
+    <ng-container matColumnDef="category">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header >Category </th>
+      <td mat-cell *matCellDef="let product"> {{product.category}} </td>
+    </ng-container>
+  
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="brand">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header > Brand </th>
+      <td mat-cell *matCellDef="let product"> {{product.brand}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="edit">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header > Edit </th>
+      <td mat-cell *matCellDef="let product"><button (click)="setProduct(product)" mat-flat-button style="height: 27px;width: auto;">Edit</button> </td>
+    </ng-container>
+
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header > Delete </th>
+      <td mat-cell *matCellDef="let product"><button (click)="deleteProduct(product.id)" mat-flat-button color="warn" style="height: 27px;width: auto;">Delete</button> </td>
+    </ng-container>
+
+    
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let products; columns: displayedColumns;"></tr>
+  </table>
+  
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+  showFirstLastButtons
+  aria-label="Select page of periodic elements">
+</mat-paginator>
+
+</div>
